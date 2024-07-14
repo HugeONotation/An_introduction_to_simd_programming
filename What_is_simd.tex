@@ -1,0 +1,112 @@
+\chapter{What is SIMD?}
+Consider what forms of parallelism are available on contemporary computing
+devices. It's likely that two main ideas come to mind: multithreading and
+general-purpose GPU programming. However, there exists a lesser-known form of
+parallelism available on our CPUs, SIMD instructions.
+
+Before explaining these, it helps to establish a point of contrast. Consider
+what using an add instruction looks like on a 32-bit machine. This instruction
+would take its inputs from a pair of general purpose registers, 32-bits in size,
+each storing one of the arguments to the addition operation. As the instruction
+executes the sum of these two numbers is computed, and will be stored in a
+32-bit general purpose register. This is what we'll refer to as a scalar add
+instruction since it computes a single sum at a time.
+
+However, many modern CPU ISAs feature vector registers and vector instructions,
+meaning we can perform multiple 32-bit additions at once. In most contemporary
+SIMD instruction sets, these vector registers are 128 bits in size, meaning they
+can fit four 32-bit integers within them at a time. Correspondingly, such ISAs
+feature vector add instructions which take these vector registers as operands
+instead of general purpose registers. This allows them to compute four different
+sums within one instruction. Often, these vector additions have the same latency
+as scalar additions, effectively meaning a 4x increase in throughput (by one
+admittedly narrow and simplified definition). On x86 CPUs, as would be used in
+almost all personal laptop/desktop computers, 256-bit SIMD is widely available,
+with 512-bit SIMD gaining ground. Correspondingly, this means 8x or even 16x
+throughput increases.
+
+It  must be admitted that this form of parallelism is not necessarily as high
+throughput or as powerful as multithreading or GPU programming might be.
+Certainly, a modern CPU may have more than 16 cores, and a GPU may handle more
+than that many threads on one of its streaming multiprocessors. However, SIMD
+instructions do have their own set of advantages.
+
+First, SIMD is a much more fine-grained form of parallelism. This makes it
+useful under circumstances where the overhead intrinsic to multithreading and
+GPU programming would render them counter-productive. The overhead of launching
+a thread, performing a context switch, or merely synchronizing data access
+across multiple threads can greater than the benefit grained from
+multithreading. Similarly, there is a substantial overhead to launching and
+executing GPU kernels. Even an empty GPU kernel that does nothing can take
+around 10 microseconds to execute (not including anything before or after, such
+as the actual communication with the CPU). This is not to say that there is no
+overhead to using SIMD. Vector instructions generally run on their own separate
+set of execution units, which may be powered off when not in use, requiring a
+startup time to be paid if they haven't been used previously. On certain CPUs,
+the use of SIMD instructions will sometimes lead to preemptive downclocking.
+
+A second broad advantage is the mere widespread availability of SIMD
+instructions when compared to machines with several cores, or dedicate GPUs.
+Basically any CPU that would be found in a dedicated consumer grade computing
+device, whether a phone, tablet, laptop, or desktop will feature SIMD
+instructions. In some sense, this makes SIMD a more reliable approach for
+improving performance since its presence may be more reasonably assumed.
+Assuming a certain amount of CPU cores or that users have dedicated GPUs is
+unreasonable in most contexts however. 
+
+Third, it is often the case that certain operations are only available as SIMD
+instructions. For example, on x86 integer maximum, minimum, absolute value, and
+average instructions are not available in scalar form, but have been available
+in SIMD form for decades. Even more recently, x86 has gained specialized
+instructions pertinent to the AES, SHA1, and SHA256 encryption algorithms, as
+well as carry-less multiplications and bit shuffling operations (or rather
+operations that are abused for that purpose). The use of these instructions may
+lead to performance benefits beyond those gained just from the greater data
+throughput. The instruction sequence itself may be shortened, sometimes greatly
+so.
+
+Yet despite these strengths, SIMD comes with a substantial set of practical
+downsides. Merely developing a familiarity with SIMD is difficult as there are
+substantially fewer resources for SIMD programming (a situation which motivates
+the writing of this book). Using SIMD instructions also generally requires
+consideration of the different CPU ISAs and microarchitectures that your
+software will be targeting, since these factors will determine which SIMD
+instruction sets are available. SIMD programming is itself generally not as
+straightforward as typical scalar programming as most programming languages have
+no dedicated facilities for it. 
+
+\section{Flynn's Taxonomy}
+All that said, what the term SIMD actually means has yet to be discussed. The
+term originates from a taxonomic system introduced by Micheal J. Flynn in 1966,
+what we now call Flynn's Taxonomy. This is a system for categorizing computer
+architectures based on whether the machine processes singular or multiple
+instruction/data streams. Correspondingly this system features four categories.
+
+% \begin{center}
+%   \begin{tabular}{ c | c c c }
+%   & & \multicolumn{2}{c}{\textbf{Instruction Streams}} \\
+%   \hline
+%   & & Single & Multiple \\ 
+%   \textbf{Data}    & Single   & SISD & MISD \\  
+%   \textbf{Streams} & Multiple & SIMD & MIMD \\    
+%   \end{tabular}
+% \end{center}
+
+Although originally meant to describe physical machines, this system of
+categorization is also used to categorize abstract machines and forms of
+parallelism in general. .
+
+\textbf{SISD} Code which operates data in a SISD fashion represents how the
+majority of code is written. Generally, most programming languages present an
+abstract machine where the programmer's code is organized within one instruction
+stream, and is then run on one data stream. 
+
+\textbf{MISD}
+
+\textbf{MIMD} Multithreaded code is most often seen in the form of .
+
+\textbf{SIMD}
+
+\section{SWAR: SIMD Within a Register}
+
+It should be clarified that for the most part, the kind of SIMD programming .

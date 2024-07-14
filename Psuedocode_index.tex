@@ -1,0 +1,45 @@
+\chapter*{Pseudocode Reference}
+\addcontentsline{toc}{chapter}{Pseudocode Reference}
+
+\begin{tabular}{ >{\bfseries} l c c c }
+  Psuedo Op & x86 & ARM \\
+  \\
+  \multicolumn{3}{c}{Bitwise Operations} \\
+  NOT    & N/A           & MVN \\
+  AND    & (v)pand       & AND \\
+  OR     & (v)por        & ORR \\
+  XOR    & (v)pxor       & EOR \\
+  ANDNOT & (v)pandn      & BIC \\
+
+  \\
+  \multicolumn{3}{c}{Integer Arithmetic} \\
+  ADD & (v)padd[bwdq] & ADD \\
+  SUB & (v)psub[bwdq] & SUB \\
+  MUL & (v)pmull[wdq] & MUl \\
+
+  \\
+  \multicolumn{3}{c}{Unsigned Integer Comparisons} \\
+  CMPEQU & & \\
+  CMPNEU & & \\
+  CMPLTU & & \\
+  CMPLEU & & \\
+  CMPGTU & & \\
+  CMPGEU & & \\
+
+  \\
+  \multicolumn{3}{c}{Signed Integer Comparisons} \\
+  CMPEQI & & \\
+  CMPNEI & & \\
+  CMPLTI & & \\
+  CMPLEI & & \\
+  CMPGTI & & \\
+  CMPGEI & & \\
+
+  \\
+  \multicolumn{3}{c}{Floating-point Arithmetic} \\
+  ADD32F & & \\
+  ADD64F & & \\
+  SUB32F & & \\
+  ADD64F & & \\
+
+\end{tabular}

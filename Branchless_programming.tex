@@ -1,0 +1,37 @@
+\chapter{Branchless Programming}
+One of the primary challenges that is encountered with SIMD programming is the
+existence of branching. This is only natural given that the entire purpose of
+branches is to perform different operations based on the values contained within
+the input data stream, and at the same time, SIMD often seeks to process
+multiple elements in a uniform manner. However, that's not so say that every
+branch is a showstopper. Many simple branches may be replaced through carefully
+crafted instruction sequences. In same cases, even loops maps be implemented in
+a manner which is suitable for .
+
+\section{}
+
+\section{Masked Instructions}
+Certain newer SIMd instruction sets, such as AVX-512, AVX10, and SVE provide a
+dedicated masking feature.
+
+\subsection{Masks on x86: AVX512 and AVX10}
+x86's masking feature set comes in two forms.
+
+\subsection{Masks on ARM: SVE}
+
+\section{Conditional Arithmetic}
+
+
+\textbf{Conditional Increment} Conditionally incrementing may be done by
+utilizing an addition instruction where one operand is the result of a
+comparison mask.
+
+\textbf{Conditional Decrement} Conditionally incrementing may be done by
+utilizing a subtraction instruction where one operand is the result of a
+comparison mask.
+
+\textbf{Conditional Addition}
+
+\textbf{Conditional Subtraction}
+
+\section{Small LUTs via Shuffles}

@@ -1,0 +1,112 @@
+\chapter{SIMD Instruction Sets \& Microarchitextures}
+When utilizing SIMD instructions, it's important to be aware of the different
+extensions . An important aspect of utilizing different. This chapter will
+contain a brief summary and history of some contemporary SIMD instruction sets. 
+
+\section{x86}
+
+\textbf{MMX (1997)} x86 gained its first SIMD instruction with the MMX
+extension. This instruction set utilized the ST registers introduced by the x87
+extension. (The x87 instruction set was the first attempt to add instructions
+for processing floating-point numbers to x86.) MMX offered 64-bit wide SIMD,
+offering a small set of instructions for manipulating 8, 16, and 32-bit
+integers. By modern standards, the MMX instruction set is considered outdated
+and its use is discouraged. For that reason is not discussed further. It is only
+mentioned to point out its irrelevance.
+
+\subsection{SSE Family}
+\textbf{SSE (1999)} This extension introduced x86's xmm registers, which are 128
+bits in size. It offers instructions primarily meant for processing 32-bit
+floats, as well as a smaller number of instructions meant for 8 and 16-bit
+unsigned integers. SSE is considered part of the base x86-64 instruction set so
+all machines which target the 64-bit variant of x86 has access to these
+instructions. The 32-bit float facilities this extension offers are considered
+as superseding the corresponding x87 facilities. When compiling for a program
+which utilizes 32-bit floats for a modern x86 CPU, compilers will make use of
+SSE instructions.
+
+\textbf{SSE2 (2000)} This extension introduces instruction for processing 64-bit
+floats, as well as 32 and 64-bit integers, as well as . Like SSE, SSE2 is part
+of the base x86-64 instruction set, and SSE2 instructions are commonly emitted
+when processing 64-bit floats.
+
+\textbf{SSE3 (2004)} This is a relatively minor ISA extension. It introduces a
+few operations for performing alternating additions/subtractions and
+additions/subtractions on adjacent vector elements, all on floats, and a few
+shuffling instructions.
+
+\textbf{SSSE3 (2006)} This is also a relatively minor addition, with the
+exception of the pshufb instruction which is broadly considered to be one of the
+most powerful broadly available SIMD instructions. 
+
+\textbf{SSE4.1 (2007)} This extension rounds out x86's .
+
+\textbf{SSE4.2 (2007)} This extension introduces instructions meant for
+processing strings and for performing cyclic redundancy checks. The instructions
+meant for processing strings do not generally perform well, and may be bested by
+the use of instructions for processing 8-bit elements.
+
+\subsection{AVX Family}
+
+\textbf{AVX (2011)} This extensions brings x86 its ymm registers, 256 bits in
+size. Additionally, it brings a new encoding scheme for SIMD instructions. This
+adds instructions for processing 32 and 64-bit floats. It also adds certain
+instructions that improve overall quality of life, such as broadcast instructions.
+
+\textbf{AVX2 (2013)} This instruction set generally extends the 128-bit
+facilities for processing 8, 16, 32, and 64 bit integers to 256 bits.
+
+\textbf{FMA a.k.a FMA3 (2014)} This instruction set mainly adds .
+
+\subsection{AVX512 Family}
+\textbf{AVX512F (2015)} 
+
+\textbf{AVX512BW (2015)}
+
+\textbf{AVX512DQ (2015)}
+
+\textbf{AVX512VL (2015)}
+
+\textbf{AVX512CD (2015)}
+
+\textbf{AVX512VPOPCNTDQ (2017)}
+
+\textbf{AVX512IFMA (2018)}
+
+\textbf{AVX512VBMI (2018)}
+
+\textbf{AVX512VNNI (2019)}
+
+\textbf{AVX512VBMI2 (2019)}
+
+\textbf{AVX512BITALG (2019)}
+
+\textbf{AVX512BF16 (2020)}
+
+\textbf{AVX512FP16 (2021)}
+
+\subsection{AVX10 Family}
+
+\textbf{AVX10.1 (Expected 2024)} This extension seeks to unify the disparate
+feature set into a different. 
+
+\textbf{AVX10.2 (Expected 2024)}
+
+\subsection{Other Important Extensions}
+\textbf{VPCLMULQDQ (2019)} 
+
+\textbf{GFNI (2019)} 
+
+\textbf{VAES (2019)} 
+
+\section{ARM}
+\subsection{Neon (2005)}
+
+\subsection{SVE (2018)}
+
+\subsection{SVE2 (2020)}
+
+\section{Intel x86 Microarchitectures}
+\section{AMD x86 Microarchitectures}
+\section{ARM Holding's CPUs}
+\section{Apple's CPUs}
