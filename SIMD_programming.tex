@@ -1,0 +1,54 @@
+\chapter{SIMD Programming}
+
+With SIMD defined, the question which naturally follows is how dedicated SIMD
+instruction sets can be put into use. Unfortunately, there is no simple answer.
+The particular machine architecture you choose to target affects what
+possibilities are available. 
+
+
+\section{Writing SIMD Code}
+
+\subsection{Compiler Intrinsics}
+Compiler intrinsics are essentially built-in functions which compile down to
+specific CPU instructions, or short sequences thereof. These are primarily
+available for the C programming language, which transitively makes the available
+for using within C++. Other fully compiled languages, such as Rust, and even
+some partially compiled languages such as C\# have facilities which exist to
+fill the same niche. For both x86 and ARM, there exist compiler intrinsics for
+every SIMD instruction, allowing for a level of granularity in choosing
+instructions comparable to using assembly, while still retaining the benefits
+from using a compiler, such as register allocation and peephole optimization.
+
+\subsection{(Inline) Assembly}
+Another possible approach is through the use of assembly. As would be expected,
+this approach offers the more control over the result. 
+
+\subsection{SIMD Libraries}
+A third possible method of leveraging a CPU's SIMD capabilities would be to make
+use of libraries which abstract over SIMD instruction sets. These libraries
+generally rely on compiler intrinsics and/or inline assembly to construct thin
+abstraction layers which provide a uniform interface over a .
+
+\subsection{Auto-vectorization}
+Arguably the easiest, although least effective method of taking using SIMD
+instructions is to rely on auto-vectorization. This refers to a family of
+compiler optimizations which recognize opportunities.
+
+\subsection{SPMD Compilers}
+There is a particular category of compilers which are available.
+
+\subsection{x86 Intrinsics}
+When using compiler intrinsics to program x86 CPUs, the most valuable resource
+will be
+\href{https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html}{Intel
+Intrinsics Guide}.
+
+x86's compiler intrinsics are originally from Intel's ICC and ICP compilers, now
+the ICX and ICPX compilers. This does not mean that you need to use Intel's
+compiler to make use of these intrinsics. These intrinsics are also offered by
+GCC, Clang, and MSVC. Therefore, compiler intrinsics are relatively portable
+across compilers.
+
+
+
+\subsection{ARM Intrinsics}

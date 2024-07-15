@@ -80,7 +80,39 @@ All that said, what the term SIMD actually means has yet to be discussed. The
 term originates from a taxonomic system introduced by Micheal J. Flynn in 1966,
 what we now call Flynn's Taxonomy. This is a system for categorizing computer
 architectures based on whether the machine processes singular or multiple
-instruction/data streams. Correspondingly this system features four categories.
+instruction/data streams. Although originally meant to describe physical
+machines, this system of categorization is also applied to abstract machines and
+to categorize forms of parallelism in general.
+
+FLynn's taxonomy features the four following categories:
+
+\textbf{Single-instruction, single-data (SISD)} The majority of all written code
+is written in a SISD fashion. The instructions are part of a single instruction
+stream and there is one stream of inputs. Although most modern computing
+machines do have at least one form of parallelism available, the abstract
+machine which most programming languages present would fall into the SISD
+category.
+
+\textbf{Single-instruction, multiple-data (SIMD)} SIMD is naturally the subject
+of this text. Under this scheme, a single sequence of instructions is applied to
+multiple sets of inputs at once. Although the focus here will be SIMD
+instructions on CPUs, it should be noted that SIMD is perhaps most thoroughly
+applied on GPU architectures, which not only make use of it as a core part of
+their programming model, but also make use of it on multiple levels.
+
+\textbf{Multiple-instruction, single-data (MISD)} This particular taxonomic
+group sees relatively little group due to the unlikeness that multiple distinct
+instruction streams have the same set of inputs. However, in situations where
+safety is critical, MISD machines are sometimes used with the instruction
+streams holding the same contents, and the same result getting computed merely
+for the sake of redundancy.
+
+\textbf{Multiple-instruction, multiple-data (MIMD)} Likely the second most
+familiar group, MIMD sees widespread use due to multicore systems falling into
+this category. With each core operating on its own instruction stream and set of
+data. At the top-most level GPUs may also be placed under this category as they
+feature multiple streaming multiprocessors, each processing their own
+instruction stream, and each with their own set of data streams.
 
 % \begin{center}
 %   \begin{tabular}{ c | c c c }
@@ -92,21 +124,19 @@ instruction/data streams. Correspondingly this system features four categories.
 %   \end{tabular}
 % \end{center}
 
-Although originally meant to describe physical machines, this system of
-categorization is also used to categorize abstract machines and forms of
-parallelism in general. .
-
-\textbf{SISD} Code which operates data in a SISD fashion represents how the
-majority of code is written. Generally, most programming languages present an
-abstract machine where the programmer's code is organized within one instruction
-stream, and is then run on one data stream. 
-
-\textbf{MISD}
-
-\textbf{MIMD} Multithreaded code is most often seen in the form of .
-
-\textbf{SIMD}
-
 \section{SWAR: SIMD Within a Register}
+The particular brand of SIMD which modern CPUs leverage is commonly referred to
+as SIMD within in a Register for very literal reasons. So it should be noted
+that the term SIMD, as it is used throughout this work, will tend to refer to
+this particular style of SIMD processing that's used available on cotemporary
+hardware.
 
-It should be clarified that for the most part, the kind of SIMD programming .
+It should be noted however that the term SWAR is also applied to hacks which
+rely on using wider types to process multiple smaller types in parallel. A very
+simple example would be, given two arrays of eight 8-bit integers, then the
+bitwise AND of both arrays could be computed all at once by loading the entire
+arrays as 64-bit integers and utilizing a 64-bit wide AND instruction.
+
+Although this seems like a fundamentally different approach, such techniques are
+commonly used in conjunction with dedicated SIMD instructions, blurring the line
+between what the two are.
